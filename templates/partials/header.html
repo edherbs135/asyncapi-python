@@ -1,0 +1,13 @@
+{% from "partials/tagModal.html" import tagModal %}
+{% macro header(spec) -%}
+    <div id="introduction" class="mt-2 col">
+        <h1>{{ spec.info.title }} {{ spec.info.version }}</h1>
+        <div class="col-auto">
+            {% for tag in spec.tags %}
+                {{tagModal(tag)}}
+                <a class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#tagModal{{tag.name}}">{{tag.name}}</a>
+            {% endfor %}
+        </div>
+        <span>{{ spec.info.description }}</span>
+    </div>
+{%- endmacro %}

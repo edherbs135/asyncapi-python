@@ -1,0 +1,15 @@
+{% macro tosModal(terms_of_service) -%}
+    <div class="modal fade" id="tosModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Terms of Service</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    {{terms_of_service}}
+                </div>
+            </div>
+        </div>
+    </div>
+{%- endmacro %}

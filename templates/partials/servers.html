@@ -1,0 +1,69 @@
+{% macro servers(servers) -%}
+    <div id="servers" class="mt-5 col">
+        <h3 class="fw-light">Servers</h3>
+    </div>
+    {% for name, server in servers.items() %}
+        <div id="server{{name}}" class="card bg-secondary bg-opacity-10 mb-2">
+            <div class="card-body">
+                <h5 class="card-title">
+                    {{name}}
+                    <span class="btn btn-sm btn-info disabled">
+                        {{server.protocol}}{{' ' + server.protocol_version if server.protocol_version}}
+                    </span>
+                </h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{server.url}}</h6>
+                <span>{{server.description}}</span>
+                {%- if server.variables -%}
+                    <div class="accordion mt-3">
+                        <div class="accordion-item">
+                            <button class="accordion-button collapsed shadow-none text-black bg-light" data-bs-toggle="collapse" data-bs-target="#server{{name}}Variables">
+                                URL Variables
+                            </button>
+                            <div id="server{{name}}Variables" class="accordion-collapse collapse bg-light">
+                                <div class="accordion-body">
+                                    {% for name, variable in server.variables.items() %}
+                                        <div class="row mb-2">
+                                            <div class="col-2">
+                                                <span class="fst-italic">{{name}}</span>
+                                            </div>
+                                            <div class="col d-flex flex-column">
+                                                {%- if variable.description -%}
+                                                    <span class="lead small mb-1">{{variable.description}}</span>
+                                                {%- endif %}
+                                                {%- if variable.default -%}
+                                                    <span class="small mb-2">
+                                                        <strong>Default: </strong>
+                                                        <span class="border rounded p-1 text-success">{{variable.default}}</span>
+                                                    </span>
+                                                {%- endif %}
+                                                {%- if variable.enum -%}
+                                                    <span class="small mb-2">
+                                                        <strong>Allowed Values: </strong>
+                                                        {% for value in variable.enum %}
+                                                            <span class="border rounded p-1 text-success">{{value}}</span>
+                                                        {% endfor %}
+                                                    </span>
+                                                {%- endif %}
+                                                {%- if variable.examples -%}
+                                                    <span class="small">
+                                                        <strong>Examples: </strong>
+                                                        {% for value in variable.examples %}
+                                                            <span class="border rounded p-1 text-success">{{value}}</span>
+                                                        {% endfor %}
+                                                    </span>
+                                                {%- endif %}
+                                            </div>
+                                        </div>
+                                        {%- if not loop.last -%}<hr />{%- endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {%- endif %}
+                {# TODO: Implement Security block #}
+                {# TODO: Implement Bindings block #}
+            </div>
+        </div>
+    {% endfor %}
+{%- endmacro %}

@@ -1,0 +1,24 @@
+{% macro tagModal(tag) -%}
+    <div class="modal fade" id="tagModal{{tag.name}}" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{tag.name}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <span>{{tag.description}}</span>
+
+                </div>
+                {%- if tag.external_docs -%}
+                    <div class="modal-footer justify-content-start">
+                        <a class="btn btn-primary" href="{{tag.external_docs.url}}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{tag.external_docs.description}}">
+                            External Docs
+                        </a>
+                    </div>
+                {%- endif %}
+
+            </div>
+        </div>
+    </div>
+{%- endmacro %}
