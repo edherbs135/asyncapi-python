@@ -1,0 +1,56 @@
+{% macro messages(messages) -%}
+    <div id="messages" class="mt-5">
+        <h3 class="fw-light">Messages</h3>
+    </div>
+    {# TODO: Remove this mock once real implementation done here and in mainContent #}
+    <div id="messageMockMessage" class="card bg-secondary bg-opacity-10 mt-2">
+        <div class="card-body">
+            <h5 class="card-title">MockMessage</h5>
+            <h6 class="card-subtitle mb-2 text-muted">A mock message</h6>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-button collapsed shadow-none text-black bg-light" data-bs-toggle="collapse" data-bs-target="#operationMockMessagePubHeaders">
+                        Headers
+                    </button>
+                    <div id="operationMockMessagePubHeaders" class="accordion-collapse collapse bg-light">
+                        <div class="accordion-body">
+                            <div class="row mt-2">
+                                <div class="col-2">
+                                    <span class="fst-italic">Mock Header field</span>
+                                </div>
+                                <div class="col d-flex flex-column">
+                                    <span class="small mb-2">
+                                        <strong>Integer</strong>
+                                        <span class="badge bg-success">>= 0</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-button collapsed shadow-none text-black bg-light" data-bs-toggle="collapse" data-bs-target="#operationMockMessagePubPayload">
+                        Payload
+                    </button>
+                    <div id="operationMockMessagePubPayload" class="accordion-collapse collapse bg-light">
+                        <div class="accordion-body">
+                            <div class="row mt-2">
+                                <div class="col-2">
+                                    <span class="fst-italic">Mock Payload field</span>
+                                </div>
+                                <div class="col d-flex flex-column">
+                                    <span class="small mb-2">
+                                        <strong>String</strong>
+                                        <span class="badge bg-success">Min Length: 10</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{%- endmacro %}

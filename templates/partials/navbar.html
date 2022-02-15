@@ -1,0 +1,125 @@
+{% macro navbarContent(spec) -%}
+    <div class="btn-group d-inline-block" role="group">
+        {%- if spec.info.contact.url or spec.info.contact.email -%}
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
+                    Contact
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        {%- if spec.info.contact.url -%}
+                            <a class="dropdown-item" href="{{spec.info.contact.url}}">
+                                {{spec.info.contact.name + ' ' if spec.info.contact.name else ''}}Website
+                            </a>
+                        {%- endif %}
+                    </li>
+                    <li>
+                        {%- if spec.info.contact.email -%}
+                            <a class="dropdown-item" href="mailto:{{spec.info.contact.email}}">
+                                Email
+                            </a>
+                        {%- endif %}
+                    </li>
+                </ul>
+            </div>
+        {%- endif %}
+        {%- if spec.info.terms_of_service or spec.info.license -%}
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                    Legal Stuff
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        {%- if spec.info.terms_of_service -%}
+                            <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#tosModal">Terms of Service</button>
+                        {%- endif %}
+                    </li>
+                    <li>
+                        {%- if spec.info.license -%}
+                            <a class="dropdown-item" href="{{spec.info.license.url if spec.info.license.url is not none else '#'}}">
+                                {{spec.info.license.name}} License
+                            </a>
+                        {%- endif %}
+                    </li>
+                </ul>
+            </div>
+        {%- endif %}
+    </div>
+    <nav class="nav navbar-expand flex-column mt-4" data-bs-dismiss="offcanvas" data-bs-target="#navbarCollapsible" style="overflow-x: hidden;overflow-y: auto;">
+        <a class="nav-item link-secondary text-decoration-none" href="#introduction">Introduction</a>
+        <a class="nav-item mt-3 link-secondary text-decoration-none fw-lighter" href="#servers">Servers</a>
+        {%- if spec.servers -%}
+            <nav class="nav flex-column">
+                {% for name in spec.servers.keys() %}
+                    <a class="nav-item mb-1 link-secondary text-decoration-none" href="#server{{name}}">{{name}}</a>
+                {% endfor %}
+            </nav>
+        {%- endif %}
+        <a class="nav-item mt-3 link-secondary text-decoration-none fw-lighter" href="#channels">Channels</a>
+        <nav class="nav flex-column">
+            {# TODO: Remove this mock once real implementation done here and in mainContent #}
+            <div class="row flex-nowrap align-items-center">
+                <div class="col-auto pe-0">
+                    <a class="btn btn-sm btn-primary shadow-none" href="#operationMockChannelPub">Pub</a>
+                    <a class="btn btn-sm btn-success shadow-none" href="#operationMockChannelSub">Sub</a>
+                </div>
+                <div class="col text-break">
+                    <a class="nav-item mb-1 link-danger text-decoration-none" href="#channelMockChannel">MockChannel</a>
+                </div>
+            </div>
+            {% for name, details in spec.channels.items() %}
+                <div class="row flex-nowrap align-items-center">
+                    <div class="col-auto pe-0">
+                        {%- if details.publish -%}<a class="btn btn-sm btn-primary shadow-none" href="#operation{{name}}Pub">Pub</a>{%- endif %}
+                        {%- if details.subscribe -%}<a class="btn btn-sm btn-success shadow-none" href="#operation{{name}}Sub">Sub</a>{%- endif %}
+                    </div>
+                    <div class="col text-break">
+                        <a class="nav-item mb-1 link-secondary text-decoration-none" href="#channel{{name}}">{{name}}</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </nav>
+        <a class="nav-item mt-3 link-secondary text-decoration-none fw-lighter" href="#messages">Messages</a>
+        <nav class="nav flex-column">
+            {# TODO: Remove this mock once real implementation done here and in mainContent #}
+            <a class="nav-item mb-1 link-danger text-decoration-none" href="#messageMockMessage">MockMessage</a>
+            {% for name in spec.components.messages.keys() %}
+                <a class="nav-item mb-1 link-secondary text-decoration-none" href="#message{{name}}">{{name}}</a>
+            {% endfor %}
+        </nav>
+        <a class="nav-item mt-3 link-secondary text-decoration-none fw-lighter" href="#schemas">Schemas</a>
+        <nav class="nav flex-column">
+            {# TODO: Remove this mock once real implementation done here and in mainContent #}
+            <a class="nav-item mb-1 link-danger text-decoration-none" href="#schemaMockSchema">MockSchema</a>
+            {% for name in spec.components.schemas.keys() %}
+                <a class="nav-item mb-1 link-secondary text-decoration-none" href="#schema{{name}}">{{name}}</a>
+            {% endfor %}
+        </nav>
+        {%- if spec.external_docs -%}
+            <span class="nav-item mt-5 link-secondary text-decoration-none fw-lighter">External Docs</span>
+            <a class="nav-item mt-1 link-secondary text-decoration-none text-break" href="{{spec.external_docs.url}}">{{spec.external_docs.description}}</a>
+        {%- endif %}
+    </nav>
+{%- endmacro %}
+{% macro navbarHidden(spec) -%}
+    <div id="navbarCollapsible" class="offcanvas offcanvas-start bg-light" tabindex="-1" data-bs-scroll="true">
+        <div class="offcanvas-header">
+            <h4 class="offcanvas-title fs-4 fw-light">{{ spec.info.title }} {{ spec.info.version }}</h4>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+        </div>
+        {{navbarContent(spec)}}
+    </div>
+{%- endmacro %}
+{% macro navbar(spec) -%}
+    <div id="navbar" class="sticky-top vh-100 bg-light d-none d-xl-block" style="width:400px">
+        <div class="col d-flex flex-column h-100 p-3">
+            <h4 class="fs-4 fw-light">{{ spec.info.title }} {{ spec.info.version }}</h4>
+            {{navbarContent(spec)}}
+        </div>
+    </div>
+{%- endmacro %}
+{% macro navbarToggle() -%}
+    <div class="fixed-bottom navbar-light d-block d-xl-none p-3">
+        <button class="btn navbar-toggler-icon" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarCollapsible"></button>
+    </div>
+{%- endmacro %}

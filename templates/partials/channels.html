@@ -1,0 +1,139 @@
+{% macro channels(channels) -%}
+    <div id="channels" class="mt-5">
+        <h3 class="fw-light">Channels</h3>
+    </div>
+    {# TODO: Remove this mock once real implementation done here and in mainContent #}
+    <div class="card bg-secondary bg-opacity-10 mb-2">
+        <div id="channelMockChannel" class="card-body">
+            <h5 class="card-title">MockChannel</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Available only on servers: <span class="border rounded p-1 text-success">SampleServer</span></h6>
+            <span>A mock channel</span>
+        </div>
+        <div id="operationMockChannelPub" class="card-body">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h5 class="card-title">Publish</h5>
+                    <h6>A mock summary for this publish operation</h6>
+                    <div class="col-auto">
+                        <a class="btn btn-sm btn-primary">Mock Tag</a>
+                    </div>
+                    <h6 class="mt-2 text-muted">A mock description</h6>
+                    <h6 class="mt-3">Sample API accepts the following message</h6>
+                    <div class="card bg-secondary bg-opacity-10 mt-2">
+                        <div class="card-body">
+                            <h5 class="card-title">MockMessage</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">A mock message</h6>
+                            <div class="accordion">
+                                <div class="accordion-item">
+                                    <button class="accordion-button collapsed shadow-none text-black bg-light" data-bs-toggle="collapse" data-bs-target="#operationMockChannelPubHeaders">
+                                        Headers
+                                    </button>
+                                    <div id="operationMockChannelPubHeaders" class="accordion-collapse collapse bg-light">
+                                        <div class="accordion-body">
+                                            <div class="row mt-2">
+                                                <div class="col-2">
+                                                    <span class="fst-italic">Mock Header field</span>
+                                                </div>
+                                                <div class="col d-flex flex-column">
+                                                    <span class="small mb-2">
+                                                        <strong>Integer</strong>
+                                                        <span class="badge bg-success">>= 0</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion">
+                                <div class="accordion-item">
+                                    <button class="accordion-button collapsed shadow-none text-black bg-light" data-bs-toggle="collapse" data-bs-target="#operationMockChannelPubPayload">
+                                        Payload
+                                    </button>
+                                    <div id="operationMockChannelPubPayload" class="accordion-collapse collapse bg-light">
+                                        <div class="accordion-body">
+                                            <div class="row mt-2">
+                                                <div class="col-2">
+                                                    <span class="fst-italic">Mock Payload field</span>
+                                                </div>
+                                                <div class="col d-flex flex-column">
+                                                    <span class="small mb-2">
+                                                        <strong>String</strong>
+                                                        <span class="badge bg-success">Min Length: 10</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="operationMockChannelSub" class="card-body">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h5 class="card-title">Subscribe</h5>
+                    <h6>A mock summary for this subscribe operation</h6>
+                    <div class="col-auto">
+                        <a class="btn btn-sm btn-primary">Mock Tag</a>
+                    </div>
+                    <h6 class="mt-2 text-muted">A mock description</h6>
+                    <h6 class="mt-3">Sample API provides the following message</h6>
+                    <div class="card bg-secondary bg-opacity-10 mt-2">
+                        <div class="card-body">
+                            <h5 class="card-title">MockMessage</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">A mock message</h6>
+                            <div class="accordion">
+                                <div class="accordion-item">
+                                    <button class="accordion-button collapsed shadow-none text-black bg-light" data-bs-toggle="collapse" data-bs-target="#operationMockChannelSubHeaders">
+                                        Headers
+                                    </button>
+                                    <div id="operationMockChannelSubHeaders" class="accordion-collapse collapse bg-light">
+                                        <div class="accordion-body">
+                                            <div class="row mt-2">
+                                                <div class="col-2">
+                                                    <span class="fst-italic">Mock Header field</span>
+                                                </div>
+                                                <div class="col d-flex flex-column">
+                                                    <span class="small mb-2">
+                                                        <strong>Integer</strong>
+                                                        <span class="badge bg-success">>= 0</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion">
+                                <div class="accordion-item">
+                                    <button class="accordion-button collapsed shadow-none text-black bg-light" data-bs-toggle="collapse" data-bs-target="#operationMockChannelSubPayload">
+                                        Payload
+                                    </button>
+                                    <div id="operationMockChannelSubPayload" class="accordion-collapse collapse bg-light">
+                                        <div class="accordion-body">
+                                            <div class="row mt-2">
+                                                <div class="col-2">
+                                                    <span class="fst-italic">Mock Payload field</span>
+                                                </div>
+                                                <div class="col d-flex flex-column">
+                                                    <span class="small mb-2">
+                                                        <strong>String</strong>
+                                                        <span class="badge bg-success">Min Length: 10</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{%- endmacro %}
